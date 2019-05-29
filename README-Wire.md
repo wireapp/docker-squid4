@@ -22,7 +22,6 @@ It requires the use of host based networking by default, but does not assume any
 
 ## Building:
 
-
 * Make sure you have installed the docker snap.
 ```
 sudo snap install docker
@@ -65,8 +64,6 @@ docker tag quay.io/wire/squid@sha256:$SQUID_SHA256 squid
 ```
 
 ## Using
-
-* If you have built your image locally, you must set IMG_TAG in run.sh to 'squid'.
 
 * Once you have either built and tagged your image, or downloaded an image, you can launch the image with run.sh:
 ```
