@@ -11,11 +11,11 @@ chown -R proxy:proxy /etc/squid4
 chmod 700 /etc/squid4/ssl_cert
 
 # Setup the squid cache directory
-if [ ! -d /var/cache/squid4 ]; then
-    mkdir -p /var/cache/squid4
+if [ ! -d /mnt/cache ]; then
+    mkdir -p /mnt/cache
 fi
-chown -R proxy: /var/cache/squid4
-chmod -R 750 /var/cache/squid4
+chown -R proxy: /mnt/cache
+chmod -R 750 /mnt/cache
 
 if [ -n "$MITM_PROXY" ]; then
     if [ -n "$MITM_KEY" ]; then
