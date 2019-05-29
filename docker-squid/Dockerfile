@@ -115,4 +115,4 @@ ENV MITM_PROXY= \
 EXPOSE 3128
 EXPOSE 3129
 
-ENTRYPOINT [ "/host/entrypoint.sh" ]
+ENTRYPOINT [ "/mnt/entrypoint.sh" ]

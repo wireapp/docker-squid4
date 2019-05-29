@@ -1,6 +1,13 @@
 #!/bin/bash
 
-set -x
+set -ex
+
+# setup configs for squid, haproxy
+rm -f /etc/squid4/squid.conf
+ln -s /mnt/squid.conf /etc/squid4/
+
+rm -f /etc/haproxy/haproxy.cfg
+ln -s /mnt/haproxy.cfg /etc/haproxy
 
 # Setup the ssl_cert directory
 if [ ! -d /etc/squid4/ssl_cert ]; then
@@ -39,12 +46,17 @@ fi
 chown proxy: /dev/stdout
 chown proxy: /dev/stderr
 
+chown -R proxy: /mnt/log
+chmod -R 750 /mnt/log
+
 # Initialize the certificates database
 /usr/libexec/security_file_certgen -c -s /var/spool/squid4/ssl_db -M1000000000
 chown -R proxy: /var/spool/squid4/ssl_db
 
-ssl_crtd -c -s
-ssl_db
+# TODO: what does this do?  aren't we going to miss it?  it doesn't
+# appear to be installed anywhere in this docker image.
+#ssl_crtd -c -s
+#ssl_db
 
 # Build the configuration directories if needed
 squid -z -N
@@ -52,5 +64,5 @@ squid -z -N
 # start haproxy
 service haproxy start
 
-# run squid!
+# run squid
 squid -N
