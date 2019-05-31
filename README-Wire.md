@@ -52,8 +52,10 @@ domain lists and cache TOC.  basic info in json:
 
 ```bash
 cat mnt/log/access.log | \
-  perl -ne '/^\S+\s+\S+\s+\S+\s+\S+\s+(\S+)\s+(\S+)\s+(\S+)\s/; print "{\"size\":\"$1\",\"verb\":\"$2\",\"uri\":\"$3\"},\n"'
+  perl -ne '/^\S+\s+\S+\s+\S+\s+\S+\s+(\S+)\s+(\S+)\s+(\S+)\s/; print "{\"size\":$1,\"verb\":\"$2\",\"uri\":\"$3\"},\n"'
 ```
+
+You can put the resulting output into a file, add '[', ']' around it and use it as input for [./parse-access.log](./parse-access.log).
 
 
 # how to set an explicit/visible proxy to various bits of software:
