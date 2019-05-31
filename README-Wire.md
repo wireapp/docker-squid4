@@ -113,3 +113,23 @@ with them.
 ```sh
 echo 'Acquire::http::Proxy "http://10.0.0.1:3128/";' > /etc/apt/apt.conf.d/10proxy
 ```
+
+
+# how to set an explicit/visible proxy to various bits of software:
+
+#### many things
+
+```sh
+export http_proxy=http://10.0.0.1:3128/
+export https_proxy=http://10.0.0.1:3128/
+```
+
+Process variables will be picked up by some programs, but not all.
+The remainder of this section lists some exceptions and how to deal
+with them.
+
+#### apt (ubuntu)
+
+```sh
+echo 'Acquire::http::Proxy "http://10.0.0.1:3128/";' > /etc/apt/apt.conf.d/10proxy
+```
