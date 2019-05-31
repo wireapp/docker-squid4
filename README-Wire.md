@@ -70,14 +70,11 @@ docker tag quay.io/wire/squid@sha256:$SQUID_SHA256 squid
 ./run.sh
 ```
 
-
 * In order for transparent services to be available, you have to run the "/root/sbin/iptables" script we copied earlier:
 ```
 sudo /root/sbin/iptables
 ```
 * Please note that the interface name in this file must be correct, and may need changed if the interface you are providing services on is not 'ens4'.
-
-
 
 # interpreting squid's access.log to export info on cache.
 
