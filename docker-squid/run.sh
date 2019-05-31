@@ -2,7 +2,7 @@
 
 set -ex
 
-IMG_TAG=quay.io/wire/squid
+IMG_TAG=quay.io/wire/squid@sha256:0df70cbcd1faa7876e89d65d215d86e1518cc45e24c7bf8891bc1b57563961fa
 
 #RUN_IN_SHELL="--entrypoint /bin/bash"
 
