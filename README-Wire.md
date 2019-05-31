@@ -58,6 +58,13 @@ cat mnt/log/access.log | \
 You can put the resulting output into a file, add '[', ']' around it and use it as input for [./parse-accesslog.hs](./parse-accesslog.hs).
 
 
+# keeping track of dns queries on VMs
+
+```bash
+perl -ne '/dnsmasq.*query\[\w+\]\s+(\S+)\sfrom/ && print "$1\n"' /var/log/syslog | sort | uniq
+```
+
+
 # how to set an explicit/visible proxy to various bits of software:
 
 #### many things
