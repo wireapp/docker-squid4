@@ -44,6 +44,7 @@ You can now launch the image with run.sh
 ./run.sh
 ```
 
+
 # interpreting squid's access.log to export info on cache.
 
 docker-squid/mnt/log/access.log can be used to extract things like
@@ -52,4 +53,24 @@ domain lists and cache TOC.  basic info in json:
 ```bash
 cat mnt/log/access.log | \
   perl -ne '/^\S+\s+\S+\s+\S+\s+\S+\s+(\S+)\s+(\S+)\s+(\S+)\s/; print "{\"size\":\"$1\",\"verb\":\"$2\",\"uri\":\"$3\"},\n"'
+```
+
+
+# how to set an explicit/visible proxy to various bits of software:
+
+#### many things
+
+```sh
+export http_proxy=http://10.0.0.1:3128/
+export https_proxy=http://10.0.0.1:3128/
+```
+
+Process variables will be picked up by some programs, but not all.
+The remainder of this section lists some exceptions and how to deal
+with them.
+
+#### apt (ubuntu)
+
+```sh
+echo 'Acquire::http::Proxy "http://10.0.0.1:3128/";' > /etc/apt/apt.conf.d/10proxy
 ```
