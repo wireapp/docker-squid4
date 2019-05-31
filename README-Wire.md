@@ -7,10 +7,9 @@ You'll want to run this to create your man-in-the-middle SSL certificate.
 cd docker-squid4/mk-ca-cert
 ./mk-certs
 cd ../docker-squid
-mkdir -p etc/ssl/private
-mkdir -p etc/ssl/certs
-cp ../mk-ca-cert/certs/private.pem ./etc/ssl/private/local_mitm.pem
-cp ../mk-ca-cert/certs/wire.com.crt ./etc/ssl/certs/local_mitm.pem
+mkdir -p ./mnt/cert
+cp ../mk-ca-cert/certs/private.pem ./mnt/cert/local-mitm-cert.pem
+cp ../mk-ca-cert/certs/wire.com.crt ./mnt/cert/local-mitm-key.pem
 ```
 
 # docker-squid
@@ -32,7 +31,7 @@ docker tag <image_id> squid
 Alternatively, you can pull it from quay.io/wire:
 
 ```sh
-export SQUID_SHA256=3c6af3b48ca03f134aad4f5aeb6eaee8093dbc185a874683cdb6f67a252124b8
+export SQUID_SHA256=0df70cbcd1faa7876e89d65d215d86e1518cc45e24c7bf8891bc1b57563961fa
 docker pull quay.io/wire/squid@sha256:$SQUID_SHA256
 docker inspect --format='{{index .RepoDigests 0}}' quay.io/wire/squid@sha256:$SQUID_SHA256 \
   | grep -q $SQUID_SHA256 && echo 'OK!' || echo '*** error: wrong checksum!'
@@ -43,4 +42,14 @@ You can now launch the image with run.sh
 
 ```
 ./run.sh
+```
+
+# interpreting squid's access.log to export info on cache.
+
+docker-squid/mnt/log/access.log can be used to extract things like
+domain lists and cache TOC.  basic info in json:
+
+```bash
+cat mnt/log/access.log | \
+  perl -ne '/^\S+\s+\S+\s+\S+\s+\S+\s+(\S+)\s+(\S+)\s+(\S+)\s/; print "{\"size\":\"$1\",\"verb\":\"$2\",\"uri\":\"$3\"},\n"'
 ```
