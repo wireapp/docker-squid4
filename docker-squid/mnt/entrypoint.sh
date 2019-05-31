@@ -24,23 +24,23 @@ fi
 chown -R proxy: /mnt/cache
 chmod -R 750 /mnt/cache
 
-if [ -n "$MITM_PROXY" ]; then
-    if [ -n "$MITM_KEY" ]; then
-        echo "Copying \"$MITM_KEY\" as MITM key..."
-        cp "$MITM_KEY" /etc/squid4/ssl_cert/mitm.pem
-        chown root:proxy /etc/squid4/ssl_cert/mitm.pem
-    fi
-
-    if [ -n "$MITM_CERT" ]; then
-        echo "Copying \"$MITM_CERT\" as MITM CA..."
-        cp "$MITM_CERT" /etc/squid4/ssl_cert/mitm.crt
-        chown root:proxy /etc/squid4/ssl_cert/mitm.crt
-    fi
+if [ "$MITM_PROXY" == "yes" ]; then
+    echo "setting up mitm proxying..."
 
     if [ -z "$MITM_CERT" ] || [ -z "$MITM_KEY" ]; then
         echo "Must specify \"$MITM_CERT\" AND \"$MITM_KEY\"." 1>&2
         exit 1
     fi
+
+    echo "Copying \"$MITM_KEY\" as MITM key..."
+    cp "$MITM_KEY" /etc/squid4/ssl_cert/mitm.pem
+    chown root:proxy /etc/squid4/ssl_cert/mitm.pem
+
+    echo "Copying \"$MITM_CERT\" as MITM CA..."
+    cp "$MITM_CERT" /etc/squid4/ssl_cert/mitm.crt
+    chown root:proxy /etc/squid4/ssl_cert/mitm.crt
+else
+    echo "mitm proxying disabled."
 fi
 
 chown proxy: /dev/stdout
