@@ -31,7 +31,6 @@ sudo snap install docker
 If you are building/running as a non-priveledged user (recommended):
 
 * Set up docker to be built as your user. taken from https://superuser.com/questions/835696/how-solve-permission-problems-for-docker-in-ubuntu
-
 ```
 sudo groupadd docker
 sudo gpasswd -a <YOUR_USERNAME_HERE> docker
@@ -64,6 +63,8 @@ docker tag quay.io/wire/squid@sha256:$SQUID_SHA256 squid
 ```
 
 ## Using
+
+* If you have built your image locally, you must set IMG_TAG in run.sh to 'squid'.
 
 * Once you have either built and tagged your image, or downloaded an image, you can launch the image with run.sh:
 ```
@@ -99,7 +100,6 @@ perl -ne '/dnsmasq.*query\[\w+\]\s+(\S+)\sfrom/ && print "$1\n"' /var/log/syslog
 ```bash
 perl -ne '/dnsmasq.*query\[\w+\]\s+(\S+)\sfrom/ && print "$1\n"' /var/log/syslog | sort | uniq
 ```
-
 
 # how to set an explicit/visible proxy to various bits of software:
 
