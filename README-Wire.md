@@ -22,6 +22,7 @@ It requires the use of host based networking by default, but does not assume any
 
 ## Building:
 
+
 * Make sure you have installed the docker snap.
 ```
 sudo snap install docker
@@ -31,6 +32,7 @@ sudo snap install docker
 If you are building/running as a non-priveledged user (recommended):
 
 * Set up docker to be built as your user. taken from https://superuser.com/questions/835696/how-solve-permission-problems-for-docker-in-ubuntu
+
 ```
 sudo groupadd docker
 sudo gpasswd -a <YOUR_USERNAME_HERE> docker
@@ -71,11 +73,13 @@ docker tag quay.io/wire/squid@sha256:$SQUID_SHA256 squid
 ./run.sh
 ```
 
+
 * In order for transparent services to be available, you have to run the "/root/sbin/iptables" script we copied earlier:
 ```
 sudo /root/sbin/iptables
 ```
 * Please note that the interface name in this file must be correct, and may need changed if the interface you are providing services on is not 'ens4'.
+
 
 
 # interpreting squid's access.log to export info on cache.
