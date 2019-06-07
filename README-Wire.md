@@ -38,6 +38,8 @@ sudo systemctl restart snap.docker.dockerd
 ```
 
 * Log out, and log in again to make your group membership active.
+TODO: find out what service needs restarted.
+* Reboot, if ubuntu 16.
 
 ### Kicking off the build:
 * If you followed the previous step, you can run this as the user you used, in that step. otherwise, as root:
@@ -49,6 +51,11 @@ docker build .
 * When this completes, it will give you an image ID on the last line of output, which will look like ```Successfully built fd0a530f522a```. Set a tag refering to that image ID, so our run script can launch the image.
 ```
 docker tag <image_id> squid
+```
+
+* Edit run.sh. comment out the current IMG_TAG, and add a new line:
+```
+IMG_TAG=squid
 ```
 
 ## Downloading:
@@ -64,14 +71,12 @@ docker tag quay.io/wire/squid@sha256:$SQUID_SHA256 squid
 
 ## Using
 
-* If you have built your image locally, you must set IMG_TAG in run.sh to 'squid'.
-
 * Once you have either built and tagged your image, or downloaded an image, you can launch the image with run.sh:
 ```
 ./run.sh
 ```
 
-* In order for transparent services to be available, you have to run the "/root/sbin/iptables" script we copied earlier:
+* In order for transparent services to be available, you have to run the "/root/sbin/iptables" script, from the wire-server-deploy-networkless instructions:
 ```
 sudo /root/sbin/iptables
 ```
