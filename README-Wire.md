@@ -38,7 +38,7 @@ sudo systemctl restart snap.docker.dockerd
 ```
 
 * Log out, and log in again to make your group membership active.
-TODO: find out what service needs restarted.
+TODO: find out what services need to be restarted.
 * Reboot, if ubuntu 16.
 
 ### Kicking off the build:
