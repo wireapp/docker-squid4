@@ -25,3 +25,4 @@ commonName          = wire.com
 [ v3_req ]
 basicConstraints    = critical,CA:TRUE
 keyUsage            = keyCertSign, cRLSign
+subjectAltName      = @alt_names
