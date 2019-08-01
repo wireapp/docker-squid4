@@ -245,6 +245,7 @@ wire@proxybox:~/docker-squid4/docker-squid$ docker container ls | grep mockserve
 f87e4ddc4a51        jamesdbloom/mockserver:mockserver-5.6.0   "/opt/mockserver/run…"   About an hour ago   Up About an hour    0.0.0.0:80->1080/tcp   vigorous_ardinghelli
 wire@proxybox:~/docker-squid4/docker-squid$ docker container stop f87e4ddc4a51
 f87e4ddc4a51
+```
 
 * Start a new mockserver.
 ```
